@@ -1,0 +1,13 @@
+class Solution {
+    public int solve(int down, int right,int[][] dp){
+        if(down==1 && right==1) return 1;
+        if(down<1 || right<1) return 0;
+        if(dp[down][right]!=-1) return dp[down][right];
+        return dp[down][right]=solve(down-1,right,dp)+solve(down,right-1,dp);
+    }
+    public int uniquePaths(int m, int n) {
+        int[][] dp=new int[m+1][n+1];
+        for(int i=0;i<m+1;i++) Arrays.fill(dp[i],-1);
+        return solve(m,n,dp);
+    }
+}
