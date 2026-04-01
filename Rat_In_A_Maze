@@ -1,0 +1,24 @@
+class Solution {
+    public void solve(int[][] maze, int x, int y, int n,String res, ArrayList<String> fr,boolean[][] visited ){
+        if(x==n-1 && y==n-1){
+            fr.add(res);
+            return;
+        }
+        if(x<0 || y<0 || x>=n || y>=n || maze[x][y]==0 || visited[x][y]) return;
+        visited[x][y]=true;
+        solve(maze,x-1,y,n,res+"U",fr,visited);
+        solve(maze,x+1,y,n,res+"D",fr,visited);
+        solve(maze,x,y-1,n,res+"L",fr,visited);
+        solve(maze,x,y+1,n,res+"R",fr,visited);
+        visited[x][y]=false;
+    }
+    public ArrayList<String> ratInMaze(int[][] maze) {
+        int n= maze.length;
+        String res="";
+        ArrayList<String> fr=new ArrayList<>();
+        boolean[][] visited=new boolean[n][n];
+        solve(maze,0,0,n,res,fr,visited);
+        Collections.sort(fr);
+        return fr;
+    }
+}
